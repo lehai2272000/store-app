@@ -7,12 +7,8 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* <Route path="/" exact component={Home} /> */}
         <Route path='/' element={<Home/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>
-        {/* <Route path="/detail/:id">
-          <Detail />
-        </Route> */}
       </Routes>
     </div>
   );

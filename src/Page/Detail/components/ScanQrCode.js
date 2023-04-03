@@ -3,6 +3,8 @@ import QRCode from "qrcode.react";
 
 import styled from "styled-components";
 const StyleDivQrCode = styled.div`
+  width: 100%;
+  height: auto
 `
 class ScanQrCode extends Component {
   render() {
@@ -13,7 +15,7 @@ class ScanQrCode extends Component {
           id="qr"
           level={"M"}
           includeMargin={true}
-          style={{width: "300px", height: "auto"}}
+          style={{ width: "300px", height: "auto" }}
         />
       </StyleDivQrCode>
     );

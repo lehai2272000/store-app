@@ -5,97 +5,97 @@ import ListItem from "./components/ListItem";
 
 
 const groupedOptions = [
-    { value: "hot", label: "Game Hot" },
-    { value: "makeup", label: "Làm Đẹp" },
-    { value: "map", label: "Bản Đồ" },
-    { value: "intellectual", label: "Game Trí Tuệ" },
-    { value: "reflex", label: "Mạo Hiểm" },
-    { value: "entertainment", label: "Giải trí" },
-    { value: "document", label: "Tài liệu" },
-  ];
+  { value: "hot", label: "Game Hot" },
+  { value: "makeup", label: "Làm Đẹp" },
+  { value: "map", label: "Bản Đồ" },
+  { value: "intellectual", label: "Game Trí Tuệ" },
+  { value: "reflex", label: "Mạo Hiểm" },
+  { value: "entertainment", label: "Giải trí" },
+  { value: "document", label: "Tài liệu" },
+];
 
 class Home extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        list: [],
-        keyword: "",
-        selectedOption: null,
-      };
-    }
-  
-    componentDidMount = () => {
-      this.getData();
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+      keyword: "",
+      selectedOption: null,
     };
-  
-    getData = () => {
-      return axios
-        .get(`https://5f95437f2de5f50016ca1da2.mockapi.io/api/products`)
-        .then((res) => {
-          var data = res.data;
-          this.setState({
-            list: data,
-          });
+  }
+
+  componentDidMount = () => {
+    this.getData();
+  };
+
+  getData = () => {
+    return axios
+      .get(`https://5f95437f2de5f50016ca1da2.mockapi.io/api/products`)
+      .then((res) => {
+        var data = res.data;
+        this.setState({
+          list: data,
         });
-    };
-  
-    searchData = (params) => {
-      return axios
-        .get(
-          `https://5f95437f2de5f50016ca1da2.mockapi.io/api/products?title=${params}`
-        )
-        .then((res) => {
-          var data = res.data;
-          this.setState({
-            list: data,
-          });
+      });
+  };
+
+  searchData = (params) => {
+    return axios
+      .get(
+        `https://5f95437f2de5f50016ca1da2.mockapi.io/api/products?title=${params}`
+      )
+      .then((res) => {
+        var data = res.data;
+        this.setState({
+          list: data,
         });
-    };
-  
-    getDataCatelogy = (params) => {
-      return axios
-        .get(
-          `https://5f95437f2de5f50016ca1da2.mockapi.io/api/products?catelogy=${params}`
-        )
-        .then((res) => {
-          if (res) {
-            console.log("res", res);
-          }
-          var data = res.data;
-          this.setState({
-            list: data,
-          });
-        });
-    };
-  
-    _onChangeSearch = (e) => {
-      const value = e.target.value;
-      this.setState(
-        {
-          keyword: value,
-        },
-        () => {
-          if (this.searching) {
-            window.clearTimeout(this.searching);
-          }
-          this.searching = window.setTimeout(() => {
-            this.searching = undefined;
-            this.searchData(value);
-          }, 300);
+      });
+  };
+
+  getDataCatelogy = (params) => {
+    return axios
+      .get(
+        `https://5f95437f2de5f50016ca1da2.mockapi.io/api/products?catelogy=${params}`
+      )
+      .then((res) => {
+        if (res) {
+          console.log("res", res);
         }
-      );
-    };
-  
-    handleChangeCatelogy = (selectedOption) => {
-      this.setState({ selectedOption });
-      this.getDataCatelogy(selectedOption?.value);
-    };
-  
-    render() {
-      const { selectedOption } = this.state;
-      const { keyword } = this.state;
-      return (
-        <StyleDivHeader>
+        var data = res.data;
+        this.setState({
+          list: data,
+        });
+      });
+  };
+
+  _onChangeSearch = (e) => {
+    const value = e.target.value;
+    this.setState(
+      {
+        keyword: value,
+      },
+      () => {
+        if (this.searching) {
+          window.clearTimeout(this.searching);
+        }
+        this.searching = window.setTimeout(() => {
+          this.searching = undefined;
+          this.searchData(value);
+        }, 300);
+      }
+    );
+  };
+
+  handleChangeCatelogy = (selectedOption) => {
+    this.setState({ selectedOption });
+    this.getDataCatelogy(selectedOption?.value);
+  };
+
+  render() {
+    const { selectedOption } = this.state;
+    const { keyword } = this.state;
+    return (
+      <StyleDivHeader>
         <div>
           <div className="header">
             <div className="left">
@@ -146,10 +146,10 @@ class Home extends Component {
               <ListItem data={data} key={data.id} />
             ))}
           </div>
-          </div>
-        </StyleDivHeader>
-      );
-    }
+        </div>
+      </StyleDivHeader>
+    );
   }
-  
-  export default Home;
+}
+
+export default Home;
